@@ -1,16 +1,16 @@
 using UnityEngine;
 using DG.Tweening;
 
-
 public class CameraController : MonoBehaviour
 {
-    UIManager uiManager;
+    private UIManager uiManager;
 
     public float moveSpeed;
 
-    Vector3 resetRotation;
-    Vector3 resetPosition;
+    private Vector3 resetRotation;
+    private Vector3 resetPosition;
 
+    private bool canRotate = true;
 
     private void Start()
     {
@@ -22,22 +22,22 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-
-
-        if (Input.GetKeyDown(KeyCode.A))
+        if (canRotate)
         {
-            //left
-            RotateLeft();
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                //left
+                RotateLeft();
+            }
+            else if (Input.GetKeyDown(KeyCode.D))
+            {
+                //right
+                RotateRight();
+            }
         }
-        else if(Input.GetKeyDown(KeyCode.D))
-        {
-            //right
-            RotateRight();
-        }
-        
     }
 
-    void RotateLeft()
+    private void RotateLeft()
     {
         Vector3 currentEuler = transform.eulerAngles;
 
@@ -53,14 +53,14 @@ public class CameraController : MonoBehaviour
     }
 
     // Helper method
-    float NormalizeAngle(float angle)
+    private float NormalizeAngle(float angle)
     {
         angle %= 360f;
         if (angle > 180f) angle -= 360f;
         return angle;
     }
 
-    void RotateRight()
+    private void RotateRight()
     {
         Vector3 currentEuler = transform.eulerAngles;
 
@@ -73,11 +73,11 @@ public class CameraController : MonoBehaviour
         // Apply new rotation using DOTween
         Vector3 newRotation = new Vector3(currentEuler.x, newY, currentEuler.z);
         transform.DORotate(newRotation, moveSpeed, RotateMode.Fast);
-
     }
 
     public void LookAtConsole(Transform lookTransform)
     {
+        canRotate = false;
         resetRotation = transform.eulerAngles;
         transform.DOMove(lookTransform.position, moveSpeed);
         transform.DORotate(lookTransform.eulerAngles, moveSpeed, RotateMode.Fast);
@@ -86,6 +86,7 @@ public class CameraController : MonoBehaviour
 
     public void ResetTransform()
     {
+        canRotate = true;
         transform.DOMove(resetPosition, moveSpeed);
         transform.DORotate(resetRotation, moveSpeed, RotateMode.Fast);
         uiManager.disableReset();
