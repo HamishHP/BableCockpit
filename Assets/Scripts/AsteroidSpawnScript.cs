@@ -12,6 +12,8 @@ public class AsteroidSpawnScript : MonoBehaviour
     private void Start()
     {
         spawnCol = GetComponent<CircleCollider2D>();
+
+        SpawnAsteroid();
     }
 
     // Update is called once per frame
@@ -22,13 +24,18 @@ public class AsteroidSpawnScript : MonoBehaviour
         if (spawnTimer > spawnFrequency)
         {
             spawnTimer = 0;
-            float spawnAngle = Random.Range(0, 360);
-            Vector3 spawnPos = new Vector3(Mathf.Sin(spawnAngle), Mathf.Cos(spawnAngle), 0).normalized;
-            spawnPos *= spawnCol.radius;
-
-            GameObject spawnedObject = Instantiate(spawnObject, spawnPos, Quaternion.identity);
-            AsteroidMoveScript spawnedAsteroid = spawnedObject.GetComponent<AsteroidMoveScript>();
-            spawnedAsteroid.targetPos = shipPos;
+            SpawnAsteroid();
         }
+    }
+
+    private void SpawnAsteroid()
+    {
+        float spawnAngle = Random.Range(0, 360);
+        Vector3 spawnPos = new Vector3(Mathf.Sin(spawnAngle), Mathf.Cos(spawnAngle), 0).normalized;
+        spawnPos *= spawnCol.radius;
+
+        GameObject spawnedObject = Instantiate(spawnObject, spawnPos, Quaternion.identity);
+        AsteroidMoveScript spawnedAsteroid = spawnedObject.GetComponent<AsteroidMoveScript>();
+        spawnedAsteroid.SetTarget(shipPos);
     }
 }

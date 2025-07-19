@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class AsteroidMoveScript : MonoBehaviour
 {
-    public Transform targetPos;
+    private Transform targetPos;
     public float moveSpeed;
 
     //alarm eventtriggger item
@@ -34,5 +34,10 @@ public class AsteroidMoveScript : MonoBehaviour
             Debug.Log("Hit alarm");
             //call alarm trigger
         }
+    }
+
+    public void SetTarget(Transform target)
+    {
+        targetPos = target;
     }
 }
