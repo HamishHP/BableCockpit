@@ -13,7 +13,6 @@ public class CameraLookPlane : MonoBehaviour
 
     private void OnMouseUpAsButton()
     {
-        Debug.Log("clicked");
         controller.LookAtConsole(cameraPosition);
     }
 }
