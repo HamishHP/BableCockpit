@@ -18,6 +18,7 @@ public class CameraController : MonoBehaviour
 
         resetRotation = Vector3.zero;
         resetPosition = transform.position;
+
     }
 
     private void Update()
@@ -35,6 +36,14 @@ public class CameraController : MonoBehaviour
                 RotateRight();
             }
         }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                ResetTransform();
+            }
+        }
+
     }
 
     private void RotateLeft()

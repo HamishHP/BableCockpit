@@ -10,12 +10,15 @@ public class BallonPump : MonoBehaviour
     public float deflateStep;
 
     public Transform ballonTransform;
+    public Vector3 baseScale;
 
     public bool canPump;
+    bool poped;
 
     private void Start()
     {
         //ballonTransform.localScale = Vector3.one * maxSize;
+        baseScale = minSize * Vector3.one;
     }
 
     private void Update()
@@ -30,6 +33,7 @@ public class BallonPump : MonoBehaviour
         {
             LostOxygen();
         }
+
     }
 
     private void FixedUpdate()
@@ -39,26 +43,33 @@ public class BallonPump : MonoBehaviour
 
     void deflateBallon()
     {
-        ballonTransform.localScale -= deflateStep * ballonTransform.localScale;
-        currentSize = ballonTransform.localScale.x;
+        if (!poped)
+        {
+            ballonTransform.localScale -= deflateStep * ballonTransform.localScale;
+            currentSize = ballonTransform.localScale.x;
+        }
     }
 
     public void InflateBallon(float amount)
     {
         if (!canPump)
             return;
-
-        if (currentSize > maxSize)
+        if(currentSize > maxSize)
+        {
             Pop();
+            return;
+        }       
 
         float newSize = currentSize + amount;
+        /*
         if (newSize > maxSize)
         {
-            ballonTransform.localScale = Vector3.one;
+            ballonTransform.localScale = ballonTransform.localScale * maxSize;
             return;
         }
+        */
 
-        ballonTransform.localScale += newSize * ballonTransform.localScale;
+        ballonTransform.localScale += newSize * baseScale;
     }
 
     void LostOxygen()
@@ -68,6 +79,8 @@ public class BallonPump : MonoBehaviour
 
     void Pop()
     {
-
+        Debug.Log("POP");
+        Destroy(ballonTransform.gameObject);
+        poped = true;
     }
 }
