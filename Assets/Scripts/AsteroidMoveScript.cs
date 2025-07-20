@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class AsteroidMoveScript : MonoBehaviour
 {
-    public Transform targetPos;
+    private Transform targetPos;
     public float moveSpeed;
+
+    public GameEvent shipHitEvent, alarmEnteredEvent;
 
     //alarm eventtriggger item
     //crash event trigger item
@@ -25,14 +27,19 @@ public class AsteroidMoveScript : MonoBehaviour
         {
             Debug.Log("Hit Ship");
 
-            //call ship trigger
+            shipHitEvent.TriggerEvent();
             Destroy(gameObject);
         }
 
         if (collision.CompareTag("Alarm"))
         {
             Debug.Log("Hit alarm");
-            //call alarm trigger
+            alarmEnteredEvent.TriggerEvent();
         }
+    }
+
+    public void SetTarget(Transform target)
+    {
+        targetPos = target;
     }
 }

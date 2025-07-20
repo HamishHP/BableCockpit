@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class BallonPump : MonoBehaviour
 {
-    GameManager gameManager;
+    private GameManager gameManager;
 
     public float maxSize;
-    float currentSize;
+    private float currentSize;
     public float minSize;
     public float warningSize;
 
@@ -15,29 +15,26 @@ public class BallonPump : MonoBehaviour
     public Vector3 baseScale;
 
     public bool canPump;
-    bool poped;
+    private bool poped;
 
     private void Start()
     {
         gameManager = FindFirstObjectByType<GameManager>();
         //ballonTransform.localScale = Vector3.one * maxSize;
         baseScale = minSize * Vector3.one;
-
     }
 
     private void Update()
     {
-        if(currentSize < warningSize)
+        if (currentSize < warningSize)
         {
             //WARNING
         }
 
-
-        if(currentSize < minSize)
+        if (currentSize < minSize)
         {
             LostOxygen();
         }
-
     }
 
     private void FixedUpdate()
@@ -45,7 +42,7 @@ public class BallonPump : MonoBehaviour
         deflateBallon();
     }
 
-    void deflateBallon()
+    private void deflateBallon()
     {
         if (!poped)
         {
@@ -58,11 +55,11 @@ public class BallonPump : MonoBehaviour
     {
         if (!canPump)
             return;
-        if(currentSize > maxSize)
+        if (currentSize > maxSize)
         {
             Pop();
             return;
-        }       
+        }
 
         float newSize = currentSize + amount;
         /*
@@ -76,16 +73,21 @@ public class BallonPump : MonoBehaviour
         ballonTransform.localScale += newSize * baseScale;
     }
 
-    void LostOxygen()
+    private void LostOxygen()
     {
         gameManager.Die("Ran out of oxygen");
     }
 
-    void Pop()
+    private void Pop()
     {
         Debug.Log("POP");
         Destroy(ballonTransform.gameObject);
         poped = true;
         gameManager.Die("Poped oxygen ballon");
+    }
+
+    public void SetCanPump(bool isFocused)
+    {
+        canPump = isFocused;
     }
 }

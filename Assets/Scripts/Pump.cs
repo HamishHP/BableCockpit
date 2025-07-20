@@ -7,9 +7,19 @@ public class Pump : MonoBehaviour
 
     public float pumpAmount;
 
+    private bool canPump = false;
+
     private void OnMouseUpAsButton()
     {
-        ballonPump.InflateBallon(pumpAmount);
-        animator.SetTrigger("Pump");
+        if (canPump)
+        {
+            ballonPump.InflateBallon(pumpAmount);
+            animator.SetTrigger("Pump");
+        }
+    }
+
+    public void SetCanPump(bool isFocused)
+    {
+        canPump = isFocused;
     }
 }
