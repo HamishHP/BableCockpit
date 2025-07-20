@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class BallonPump : MonoBehaviour
 {
+    GameManager gameManager;
+
     public float maxSize;
     float currentSize;
     public float minSize;
@@ -17,8 +19,10 @@ public class BallonPump : MonoBehaviour
 
     private void Start()
     {
+        gameManager = FindFirstObjectByType<GameManager>();
         //ballonTransform.localScale = Vector3.one * maxSize;
         baseScale = minSize * Vector3.one;
+
     }
 
     private void Update()
@@ -74,7 +78,7 @@ public class BallonPump : MonoBehaviour
 
     void LostOxygen()
     {
-
+        gameManager.Die("Ran out of oxygen");
     }
 
     void Pop()
@@ -82,5 +86,6 @@ public class BallonPump : MonoBehaviour
         Debug.Log("POP");
         Destroy(ballonTransform.gameObject);
         poped = true;
+        gameManager.Die("Poped oxygen ballon");
     }
 }
