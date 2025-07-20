@@ -12,13 +12,14 @@ public class CameraController : MonoBehaviour
 
     private bool canRotate = true;
 
+    public GameEvent focusEvent, unfocusEvent;
+
     private void Start()
     {
         uiManager = FindFirstObjectByType<UIManager>();
 
         resetRotation = Vector3.zero;
         resetPosition = transform.position;
-
     }
 
     private void Update()
@@ -43,7 +44,6 @@ public class CameraController : MonoBehaviour
                 ResetTransform();
             }
         }
-
     }
 
     private void RotateLeft()
@@ -86,8 +86,12 @@ public class CameraController : MonoBehaviour
 
     public void LookAtConsole(Transform lookTransform)
     {
+        if (canRotate)
+        {
+            resetRotation = transform.eulerAngles;
+        }
         canRotate = false;
-        resetRotation = transform.eulerAngles;
+        focusEvent.TriggerEvent();
         transform.DOMove(lookTransform.position, moveSpeed);
         transform.DORotate(lookTransform.eulerAngles, moveSpeed, RotateMode.Fast);
         uiManager.enableReset();
@@ -96,6 +100,7 @@ public class CameraController : MonoBehaviour
     public void ResetTransform()
     {
         canRotate = true;
+        unfocusEvent.TriggerEvent();
         transform.DOMove(resetPosition, moveSpeed);
         transform.DORotate(resetRotation, moveSpeed, RotateMode.Fast);
         uiManager.disableReset();
