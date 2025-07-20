@@ -7,6 +7,7 @@ public class AsteroidSpawnScript : MonoBehaviour
     public GameObject spawnObject;
     public float spawnFrequency = 4f;
     private float spawnTimer = 0;
+    public ShipLaserScript shipLaser;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
@@ -37,6 +38,8 @@ public class AsteroidSpawnScript : MonoBehaviour
 
         GameObject spawnedObject = Instantiate(spawnObject, spawnPos, Quaternion.identity);
         AsteroidMoveScript spawnedAsteroid = spawnedObject.GetComponent<AsteroidMoveScript>();
+        AsteroidDestroyScript asteroidDestroyScript = spawnedAsteroid.GetComponent<AsteroidDestroyScript>();
+        asteroidDestroyScript.SetShipLaser(shipLaser);
         spawnedAsteroid.SetTarget(shipPos);
     }
 }

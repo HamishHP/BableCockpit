@@ -6,6 +6,8 @@ public class AsteroidDestroyScript : MonoBehaviour, IGameClickable
 
     public GameEvent alarmExitEvent;
 
+    private ShipLaserScript shipLaserScript;
+
     public void OnClicked()
     {
         DestroyAsteroid();
@@ -14,6 +16,7 @@ public class AsteroidDestroyScript : MonoBehaviour, IGameClickable
     private void DestroyAsteroid()
     {
         Instantiate(particles, transform.position, Quaternion.identity);
+        shipLaserScript.ShootLaser(transform.position);
         Destroy(gameObject);
     }
 
@@ -24,5 +27,10 @@ public class AsteroidDestroyScript : MonoBehaviour, IGameClickable
             alarmExitEvent.TriggerEvent();
             Debug.Log("Asteroid Gone");
         }
+    }
+
+    public void SetShipLaser(ShipLaserScript shipLaser)
+    {
+        shipLaserScript = shipLaser;
     }
 }
