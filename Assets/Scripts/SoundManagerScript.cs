@@ -46,11 +46,21 @@ public class SoundManagerScript : MonoBehaviour
         }
     }
 
-    public void PlaySoundClip(GameSound soundData)
+    public AudioSource PlaySoundClip(GameSound soundData, bool isLooping = false, Transform soundPosition = null)
     {
         if (soundData.clip != null)
         {
-            AudioSource audioSource = Instantiate(soundObject, transform.position, Quaternion.identity);
+            AudioSource audioSource;
+
+            if (soundPosition == null)
+            {
+                audioSource = Instantiate(soundObject, transform.position, Quaternion.identity);
+            }
+            else
+            {
+                audioSource = Instantiate(soundObject, transform.position, Quaternion.identity);
+                audioSource.spatialBlend = 1;
+            }
 
             audioSource.clip = soundData.clip;
 
@@ -62,11 +72,21 @@ public class SoundManagerScript : MonoBehaviour
 
             float clipLength = audioSource.clip.length / Mathf.Abs(audioSource.pitch);
 
-            Destroy(audioSource.gameObject, clipLength);
+            if (!isLooping)
+            {
+                Destroy(audioSource.gameObject, clipLength);
+                return null;
+            }
+            else
+            {
+                audioSource.loop = true;
+                return audioSource;
+            }
         }
         else
         {
             Debug.LogWarning("Lol you forgor to put a clip in this one");
+            return null;
         }
     }
 

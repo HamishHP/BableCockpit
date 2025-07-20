@@ -44,7 +44,7 @@ public class GameClickScript : MonoBehaviour
 
     private void CastClickRay()
     {
-        RaycastHit2D hit = Physics2D.Raycast(GetMousePos(), Vector2.zero, ignoreRays);
+        RaycastHit2D hit = Physics2D.Raycast(GetMousePos(), Vector2.zero, 0, ignoreRays);
 
         if (hit)
         {

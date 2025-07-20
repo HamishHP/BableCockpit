@@ -33,6 +33,7 @@ public class AsteroidSpawnScript : MonoBehaviour
         float spawnAngle = Random.Range(0, 360);
         Vector3 spawnPos = new Vector3(Mathf.Sin(spawnAngle), Mathf.Cos(spawnAngle), 0).normalized;
         spawnPos *= spawnCol.radius;
+        spawnPos.z = spawnCol.transform.position.z;
 
         GameObject spawnedObject = Instantiate(spawnObject, spawnPos, Quaternion.identity);
         AsteroidMoveScript spawnedAsteroid = spawnedObject.GetComponent<AsteroidMoveScript>();
