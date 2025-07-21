@@ -105,7 +105,7 @@ public class BallonPump : MonoBehaviour
         Debug.Log("POP");
         Destroy(ballonTransform.gameObject);
         poped = true;
-        gameManager.Die("Poped oxygen ballon");
+        gameManager.Die("Popped oxygen balloon");
         gameObject.SetActive(false);
     }
 
