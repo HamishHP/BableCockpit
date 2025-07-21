@@ -3,19 +3,18 @@ using UnityEngine;
 public class LightController : MonoBehaviour
 {
     public Light[] lights;
-    public float lightIntensity;
     public float lightDecreaseStep;
 
-    private void FixedUpdate()
+    private void Update()
     {
         DecreaseLights();
     }
 
-    void DecreaseLights()
+    private void DecreaseLights()
     {
         foreach (Light light in lights)
         {
-            light.intensity -= lightDecreaseStep;
+            light.intensity -= lightDecreaseStep * Time.deltaTime;
         }
     }
 
@@ -26,5 +25,4 @@ public class LightController : MonoBehaviour
             light.intensity += amount;
         }
     }
-
 }

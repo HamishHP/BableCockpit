@@ -5,7 +5,8 @@ public class AsteroidMoveScript : MonoBehaviour
     private Transform targetPos;
     public float moveSpeed;
 
-    public GameEvent shipHitEvent, alarmEnteredEvent;
+    public GameEvent shipHitEvent, alarmEnteredEvent, shutUpEvent;
+    public GameSound hitSound;
 
     //alarm eventtriggger item
     //crash event trigger item
@@ -26,6 +27,9 @@ public class AsteroidMoveScript : MonoBehaviour
         if (collision.CompareTag("Ship"))
         {
             Debug.Log("Hit Ship");
+
+            shutUpEvent.TriggerEvent();
+            SoundManagerScript.instance.PlaySoundClip(hitSound);
 
             shipHitEvent.TriggerEvent();
             Destroy(gameObject);

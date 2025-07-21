@@ -8,7 +8,7 @@ public class GameClickScript : MonoBehaviour
 
     public LayerMask ignoreRays;
 
-    public bool canClick = true;
+    private bool canClick = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
@@ -50,5 +50,10 @@ public class GameClickScript : MonoBehaviour
         {
             hit.transform.SendMessage("OnClicked", SendMessageOptions.DontRequireReceiver);
         }
+    }
+
+    public void SetCanClick(bool isFocused)
+    {
+        canClick = isFocused;
     }
 }

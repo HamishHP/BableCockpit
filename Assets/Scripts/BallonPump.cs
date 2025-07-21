@@ -17,6 +17,11 @@ public class BallonPump : MonoBehaviour
     public bool canPump;
     private bool poped;
 
+    public GameSound pumpSound, popSound, alarmSound;
+    public GameEvent shutUpEvent; //probably will also just be the game end event. To stop all other sound sources when game over
+
+    private AudioSource currentAlarm;
+
     private void Start()
     {
         gameManager = FindFirstObjectByType<GameManager>();
@@ -28,7 +33,18 @@ public class BallonPump : MonoBehaviour
     {
         if (currentSize < warningSize)
         {
-            //WARNING
+            if (currentAlarm == null)
+            {
+                currentAlarm = SoundManagerScript.instance.PlaySoundClip(alarmSound, true, ballonTransform);
+            }
+        }
+        else
+        {
+            if (currentAlarm != null)
+            {
+                Destroy(currentAlarm.gameObject);
+                currentAlarm = null;
+            }
         }
 
         if (currentSize < minSize)
@@ -61,6 +77,8 @@ public class BallonPump : MonoBehaviour
             return;
         }
 
+        SoundManagerScript.instance.PlaySoundClip(pumpSound);
+
         float newSize = currentSize + amount;
         /*
         if (newSize > maxSize)
@@ -75,15 +93,20 @@ public class BallonPump : MonoBehaviour
 
     private void LostOxygen()
     {
+        shutUpEvent.TriggerEvent();
         gameManager.Die("Ran out of oxygen");
+        gameObject.SetActive(false);
     }
 
     private void Pop()
     {
+        shutUpEvent.TriggerEvent();
+        SoundManagerScript.instance.PlaySoundClip(popSound);
         Debug.Log("POP");
         Destroy(ballonTransform.gameObject);
         poped = true;
-        gameManager.Die("Poped oxygen ballon");
+        gameManager.Die("Popped oxygen balloon");
+        gameObject.SetActive(false);
     }
 
     public void SetCanPump(bool isFocused)
