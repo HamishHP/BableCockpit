@@ -9,6 +9,8 @@ public class ShipLaserScript : MonoBehaviour
 
     public float laserDuration = 0.3f;
 
+    public GameSound laserSound;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
@@ -24,6 +26,7 @@ public class ShipLaserScript : MonoBehaviour
     public void ShootLaser(Vector3 targetPosition)
     {
         StopAllCoroutines();
+        SoundManagerScript.instance.PlaySoundClip(laserSound);
         lineRenderer.enabled = true;
         StartCoroutine(ShootLaserTime(targetPosition));
     }

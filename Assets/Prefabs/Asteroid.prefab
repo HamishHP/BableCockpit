@@ -114,6 +114,8 @@ MonoBehaviour:
   moveSpeed: 0.4
   shipHitEvent: {fileID: 11400000, guid: fff72f70a8a214a42aa1a3689e54b569, type: 2}
   alarmEnteredEvent: {fileID: 11400000, guid: e7be35ed047c1844eb97c44e83ff59d6, type: 2}
+  shutUpEvent: {fileID: 11400000, guid: ad9ea812a438be640913504ae823506a, type: 2}
+  hitSound: {fileID: 11400000, guid: 67565f619c1ebd14ca4559e53d246884, type: 2}
 --- !u!114 &-7463643874964470800
 MonoBehaviour:
   m_ObjectHideFlags: 0

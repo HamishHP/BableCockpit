@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86c4ce0a406f8074593a39d81c9a1c56, type: 3}
-  m_Name: Shake
+  m_Name: AsteroidImpact
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: ab963fdbec487f34db9762e412c070fc, type: 3}
+  clip: {fileID: 8300000, guid: b4242615ea9f847438f139a6b0c981be, type: 3}
   volume: 1
-  pitchMin: -0.17
-  pitchMax: 0.34
+  pitchMin: 0
+  pitchMax: 0

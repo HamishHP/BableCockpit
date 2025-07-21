@@ -58,7 +58,7 @@ public class SoundManagerScript : MonoBehaviour
             }
             else
             {
-                audioSource = Instantiate(soundObject, transform.position, Quaternion.identity);
+                audioSource = Instantiate(soundObject, soundPosition.position, Quaternion.identity);
                 audioSource.spatialBlend = 1;
             }
 

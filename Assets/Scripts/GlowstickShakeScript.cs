@@ -70,6 +70,7 @@ public class GlowstickShakeScript : MonoBehaviour
             {
                 hasShaken = true;
                 StartCoroutine(ShakeSoundDelay());
+                IncrementGlow();
                 SoundManagerScript.instance.PlaySoundClip(shakeSound);
             }
         }
@@ -79,7 +80,6 @@ public class GlowstickShakeScript : MonoBehaviour
 
     private IEnumerator ShakeSoundDelay()
     {
-        IncrementGlow();
         yield return new WaitForSeconds(shakeSoundTime);
         hasShaken = false;
     }

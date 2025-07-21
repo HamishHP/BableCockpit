@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86c4ce0a406f8074593a39d81c9a1c56, type: 3}
-  m_Name: Shake
+  m_Name: Laser
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: ab963fdbec487f34db9762e412c070fc, type: 3}
-  volume: 1
-  pitchMin: -0.17
-  pitchMax: 0.34
+  clip: {fileID: 8300000, guid: 1896f1a2f294a6648aa406739074fd8f, type: 3}
+  volume: 0.8
+  pitchMin: -0.06
+  pitchMax: 0.43
