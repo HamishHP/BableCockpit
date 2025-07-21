@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Laser
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: 1896f1a2f294a6648aa406739074fd8f, type: 3}
-  volume: 0.8
+  volume: 0.378
   pitchMin: -0.06
   pitchMax: 0.43
