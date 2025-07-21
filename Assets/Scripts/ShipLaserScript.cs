@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class ShipLaserScript : MonoBehaviour
 {
+    public Transform parentObj;
     private LineRenderer lineRenderer;
     public Transform shipPosition;
 
@@ -12,7 +13,7 @@ public class ShipLaserScript : MonoBehaviour
     private void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
-        lineRenderer.SetPosition(0, shipPosition.position);
+        lineRenderer.SetPosition(0, parentObj.InverseTransformPoint(shipPosition.position));
     }
 
     // Update is called once per frame
@@ -29,7 +30,7 @@ public class ShipLaserScript : MonoBehaviour
 
     private IEnumerator ShootLaserTime(Vector3 target)
     {
-        lineRenderer.SetPosition(1, target);
+        lineRenderer.SetPosition(1, parentObj.InverseTransformPoint(target));
         yield return new WaitForSeconds(laserDuration);
         lineRenderer.enabled = false;
     }
