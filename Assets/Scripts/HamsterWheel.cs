@@ -1,4 +1,5 @@
 using UnityEngine;
+using DG.Tweening;
 
 public class HamsterWheel : MonoBehaviour
 {
@@ -6,12 +7,16 @@ public class HamsterWheel : MonoBehaviour
 
 
     public MeshRenderer wheelRenderer;
+    public Transform wheelTransform;
+    public float maxWheelSpeed;
+    public float currentWheelSpeed;
     public Rat rat;
 
     float currentTime;
     public Vector2 waitTimeRange;
     float waitTime = 10;
 
+    bool spinning;
 
     private void Start()
     {
@@ -21,26 +26,42 @@ public class HamsterWheel : MonoBehaviour
 
     private void Update()
     {
-        currentTime += Time.deltaTime;
+        if (spinning)
+        {
+            currentTime += Time.deltaTime;
+        }
+        else if(currentWheelSpeed > 0)
+        {
+            currentWheelSpeed -= 1;
+            
+        }
 
-        if (!wheelRenderer.isVisible && currentTime > waitTime)
+        if (currentTime > waitTime)
         {
             RemoveRat();
-            Debug.Log("Remove rat");
+            currentTime = 0;
         }
+
+        wheelTransform.Rotate(0, 0, currentWheelSpeed * Time.deltaTime);
     }
 
     public void AddRat()
     {
+        Debug.Log("add rat");
+        currentWheelSpeed = maxWheelSpeed;
+        spinning = true;
         newWaitTime();
         rat.PutOnWheel();
         battery.ratRunning = true;
+
     }
 
     void RemoveRat()
     {
+        spinning = false;
         rat.Hide();
         battery.ratRunning = false;
+
     }
 
     void newWaitTime()

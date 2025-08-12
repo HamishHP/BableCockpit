@@ -6,11 +6,13 @@ public class Rat : MonoBehaviour
     public Transform wheelPoint;
 
     public Transform[] hidePoints;
+    public HamsterWheel HamsterWheel;
 
     public void PutOnWheel()
     {
         OnWheel = true;
         transform.position = wheelPoint.position;
+        transform.rotation = wheelPoint.rotation;
     }
 
     public void Hide()
@@ -26,6 +28,7 @@ public class Rat : MonoBehaviour
         if (!OnWheel)
         {
             PutOnWheel();
+            HamsterWheel.AddRat();
         }
     }
 }
