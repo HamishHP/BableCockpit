@@ -3307,7 +3307,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5000001
   m_Height: 2
@@ -3387,7 +3387,7 @@ MonoBehaviour:
   minGlowIntensity: 0.1
   maxGlowIntensity: 4.5
   m_Camera: {fileID: 330585545}
-  minShakeVelocity: 50
+  minShakeVelocity: 10
   shakeSound: {fileID: 11400000, guid: cb8189785333ef640a8fa66a47e0971a, type: 2}
   shakeSoundTime: 0.6
 --- !u!114 &1140262598
