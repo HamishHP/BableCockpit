@@ -21,7 +21,6 @@ public class GlowstickShakeScript : MonoBehaviour
     private Vector3 initialPos;
 
     private Vector3 direction;
-    private Vector3 newPosition;
     public float minShakeVelocity = 30;
 
     private bool hasShaken = false;
@@ -60,7 +59,7 @@ public class GlowstickShakeScript : MonoBehaviour
         mousePos.z = camDistance;
         glowStickPos = m_Camera.ScreenToWorldPoint(mousePos);
 
-        direction = newPosition - transform.position;
+        direction = glowStickPos - transform.position;
 
         float velocity = direction.magnitude / Time.deltaTime;
 
