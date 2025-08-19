@@ -7,9 +7,14 @@ public class SceneLoadScript : MonoBehaviour
     public float waitTime = 1f;
     public GameEvent sceneResetEvent;
 
+    public void PlayGameScene() 
+    {
+        SceneManager.LoadScene(1);  //assumes game scene is 1
+    }
+
     public void ResetScene()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void ReloadSceneDelay()
@@ -21,6 +26,6 @@ public class SceneLoadScript : MonoBehaviour
     private IEnumerator SceneLoadDelay()
     {
         yield return new WaitForSeconds(waitTime);
-        SceneManager.LoadScene(0);  //assumes this scene is the first one
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);  
     }
 }
